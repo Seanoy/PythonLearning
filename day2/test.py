@@ -9,6 +9,7 @@ from collections import defaultdict
 from collections import Counter
 from operator import itemgetter
 from operator import attrgetter
+from itertools import groupby
 # 使用 deque(maxlen=N) 构造函数会新建一个固定大小的队列。
 # 当新的元素加入并且这个队列已满的时候，最老的元素会自动被移除掉。
 
@@ -368,4 +369,32 @@ users2 = [User1(12, 'Sean', 'oy'), User1(3, 'Tom', 'cat')]
 by_name = sorted(users2, key=attrgetter('ln', 'fn'))
 print(by_name)
 print(min(users2, key=attrgetter('user_id')))
+
+# 通过某个字段将记录分组  such as 'date'
+rows = [
+ {'address': '5412 N CLARK', 'date': '07/01/2012'},
+ {'address': '5148 N CLARK', 'date': '07/04/2012'},
+ {'address': '5800 E 58TH', 'date': '07/02/2012'},
+ {'address': '2122 N CLARK', 'date': '07/03/2012'},
+ {'address': '5645 N RAVENSWOOD', 'date': '07/02/2012'},
+ {'address': '1060 W ADDISON', 'date': '07/02/2012'},
+ {'address': '4801 N BROADWAY', 'date': '07/01/2012'},
+ {'address': '1039 W GRANVILLE', 'date': '07/04/2012'}
+]
+
+# Sort by the desired field first
+rows.sort(key=itemgetter('date'))
+# Iterate in groups
+for date, items in groupby(rows, key=itemgetter('date')):
+    print(date)
+    for i in items:
+        print(' ', i)
+print('\n')
+
+rows_by_date = defaultdict(list)
+for row in rows:
+    rows_by_date[row['date']].append(row)
+
+for r in rows_by_date['07/01/2012']:
+    print(r)
 

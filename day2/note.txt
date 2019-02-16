@@ -58,3 +58,7 @@ sorted(number, key=itemgetter('id'))
 上述效果三者等价
 但attrgetter支持多字段进行比较且更快些
 
+(itertools.groupby)
+groupby()函数仅仅扫描连续的元素，如果事先没有排序则得不到想要的结果
+
+
