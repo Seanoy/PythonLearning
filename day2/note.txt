@@ -1,0 +1,20 @@
+使用队列需要添加
+from collections import deque
+双端队列deque数据操作
+q = deque(maxlen=n)
+不设置大小的话队列无限长，超过n长度的数据会将最先进入队列的数据删除然后整体移动腾出足够位置
+append  插入
+appendleft 在队列左边插入
+pop  弹出最后一个数据
+popleft 在队列左面弹出
+
+
+获得最大或者最小的 N 个元素列表
+import heapq
+heapq.nlargest(n, iterable, key) n个最大值，可迭代类型， （关键字）
+nsmallest同理
+
+
+
+
+
