@@ -1,3 +1,4 @@
+day2：P24-42
 使用队列需要添加
 from collections import deque
 双端队列deque数据操作
@@ -14,7 +15,46 @@ import heapq
 heapq.nlargest(n, iterable, key) n个最大值，可迭代类型， （关键字）
 nsmallest同理
 
+队列下标为负数时
+[0]第一个数
+[-length]第一个数
+[-1]最后一个数
+[length-1]最后一个数
 
+__repr__ 返回一个可以用来表示对象的可打印字符串 和__str__相同作用，前者方便开发人员，后者方便使用者
 
+三元组(priority, index, item)可以有效进行按照优先级进行比较的操作
 
+想要字典中的key映射多个值，需要将这多个值放到另外的容器中，比如列表或者集合里面。
+
+元组（tuple）a = ('seanOY', 1)
+列表（list） b = ['seanOY', 1]
+集合（set）  c = {'seanOY', 1}
+字典（dict） d ={'name': 'ABC', 'price': 9}
+
+defaultdict 使用dict时，如果引用的Key不存在，就会抛出KeyError。
+            如果希望key不存在时，返回一个默认值，就可以用defaultdict：
+            多值为集合形式时  d['a']的输出为{1,2}
+OrderDict   可保持key的顺序
+
+zip() 可将字典中key和value反转
+
+字典 keys()返回一个展现键集合的键视图对象 它支持集合操作
+    items()返回一个包含 (键，值) 对的元素视图对象  它支持集合操作
+    values()它并不支持大部分的集合操作，原因是不能保证值互不相同
+
+文件读操作   f1 = open('./data.txt', 'r')    r表示只读   r+表示可读写
+
+python中有一个非常有用的语法叫做生成器，所利用到的关键字就是yield。
+有效利用生成器这个工具可以有效地节约系统资源，避免不必要的内存占用。
+
+切片可以避免很多硬编码下标（如a[1]，而软编码下标类似a[i]，在运行时可以确定修改的，而前者不可以）
+
+Counter 对象在几乎所有需要制表或者计数数据的场合是非常有用的工具。
+
+sorted(number, key=attrgetter('id'))
+sorted(number, key=lambda o: o.id)
+sorted(number, key=itemgetter('id'))
+上述效果三者等价
+但attrgetter支持多字段进行比较且更快些
 
