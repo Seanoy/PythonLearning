@@ -4,6 +4,8 @@
 import math
 from itertools import compress
 from collections import namedtuple
+import os
+from collections import ChainMap
 # 过滤序列元素
 # 列表推导
 my_list = [1, 4, -5, 10, -7, 2, 3, -1]
@@ -142,4 +144,90 @@ print(b)
 print(dict_to_stock(b))
 # 如果你的目标是定义一个需要更新很多实例属性的高效数据结构，
 # 那么命名元组并不是你的最佳选择。这时候你应该考虑定义一个包含__slots__方法的类
+
+
+# 转换并同时计算数据
+num = [1, 2, 3, 4]
+s = sum(x * x for x in num)
+print(s)
+
+
+files = os.listdir('D:\python_learn\day3')
+if any(name.endswith('.py') for name in files):
+    print('There be python!')
+else:
+    print('Sorry, no python.')
+
+# Output a tuple as CSV
+s = ('AC', 50, 1.1)
+print(','.join(str(x) for x in s))
+
+
+portfolio = [
+ {'name': 'GOOG', 'shares': 50},
+ {'name': 'YHOO', 'shares': 75},
+ {'name': 'AOL', 'shares': 20},
+ {'name': 'SCOX', 'shares': 65}
+]
+
+# Original: Returns 20
+min_share = min(s['shares'] for s in portfolio)
+print(min_share)
+
+# Alternative: Returns {'name': 'AOL', 'shares': 20}
+min_shares = min(portfolio, key=lambda s: s['shares'])
+print(min_shares)
+
+# 合并多个字典或映射
+a = {'x': 1, 'z': 3}
+b = {'y': 2, 'z': 4}
+c = ChainMap(a, b)      # 如果在a中找不到就到b中找
+print(c['x'])
+print(c['y'])
+print(c['z'])
+
+print(len(c))
+print(list(c.keys()))
+print(list(c.values()))
+print(list(c.items()))
+
+# 对于字典的更新或删除操作总是影响的是列表中第一个字典。
+c['z'] = 10
+c['w'] = 40
+del c['x']
+print(a)
+
+# ChainMap 对于编程语言中的作用范围变量 (比如 globals , locals 等) 是非常有用
+values = ChainMap()
+values['y'] = 1
+# Add a new mapping
+values = values.new_child()
+values['x'] = 2
+# Add a new mapping
+values = values.new_child()
+values['x'] = 3
+print(values)
+
+# discard last mapping
+values = values.parents
+print(values['x'])
+
+# 作为 ChainMap 的替代，你可能会考虑使用 update() 方法将两个字典合并。
+a = {'x': 1, 'z': 3}
+b = {'y': 2, 'z': 4}
+merged = dict(b)
+merged.update(a)
+print(merged.items())
+
+# 如果原字典做了更新，这种改变不会反应到新的合并字典中去
+a['x'] = 13
+print(merged['x'])
+
+# ChainMap 使用原来的字典，它自己不创建新的字典。所以它并不会产生上面所说的结果
+a = {'x': 1, 'z': 3}
+b = {'y': 2, 'z': 4}
+merged = ChainMap(a, b)
+print(merged['x'])
+a['x'] = 40
+print(merged['x'])  # Notice change to merged dicts
 

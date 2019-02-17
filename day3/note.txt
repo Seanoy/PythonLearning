@@ -1,4 +1,4 @@
-day3:P44-48
+day3:P44-54
 
 The way to filter sequence element:
 1、列表推导
@@ -11,4 +11,14 @@ The way to filter sequence element:
 
 命名元组可以将你的代码从下标操作中解脱出来。
 命名元组另一个用途就是作为字典的替代
+
+使用生成器迭代可加快运算速度，节省空间
+
+collections.ChainMap
+合并多个字典，如果出现重复键则只会返回第一次出现的值
+删除和更新操作只对列表中第一个字典生效
+
+
+
+
 
